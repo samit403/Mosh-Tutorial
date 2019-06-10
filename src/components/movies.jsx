@@ -61,7 +61,7 @@ class Movies extends Component {
                     {/* like component */}
                     <Like
                       liked={item.liked}
-                      onClick={() => this.handleLike(item)}
+                      onLikeClick={() => this.handleLike(item)}
                     />
                   </td>
                   <td>

@@ -8,7 +8,7 @@ class Like extends Component {
   render() {
     return (
       <i
-        onClick={this.props.onClick}
+        onClick={this.props.onLikeClick}
         className={this.getLikeClass()}
         aria-hidden="true"
       />
