@@ -12,7 +12,7 @@ class Pagination extends Component {
           </li>
           <li className="page-item">
             <a className="page-link" href="#">
-              2 <span className="sr-only">(current)</span>
+              2
             </a>
           </li>
           <li className="page-item">
