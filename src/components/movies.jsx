@@ -4,12 +4,17 @@ import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
+import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
+  // State of the component
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    pageSize: 4,
+    currentPage: 1
   };
 
+  // event Handlers
   handleDelete = item => {
     const movies = this.state.movies.filter(e => e !== item);
     this.setState({ movies });
@@ -23,6 +28,11 @@ class Movies extends Component {
     this.setState({ movies: movies });
   };
 
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
+  // render function
   render() {
     if (this.state.movies.length === 0) {
       return (
@@ -31,6 +41,13 @@ class Movies extends Component {
         </span>
       );
     }
+
+    const movieGroups = paginate(
+      this.state.movies,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+
     return (
       <React.Fragment>
         <nav className="navbar navbar-light bg-light">
@@ -50,7 +67,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map(item => {
+            {movieGroups.map(item => {
               return (
                 <tr key={item._id}>
                   <td>{item.title}</td>
@@ -58,7 +75,7 @@ class Movies extends Component {
                   <td>{item.numberInStock}</td>
                   <td>{item.dailyRentalRate}</td>
                   <td>
-                    {/* like component */}
+                    {/* Like component */}
                     <Like
                       liked={item.liked}
                       onLikeClick={() => this.handleLike(item)}
@@ -78,7 +95,12 @@ class Movies extends Component {
           </tbody>
         </table>
         {/* pagination component */}
-        <Pagination />
+        <Pagination
+          itemsCount={this.state.movies.length}
+          pageSize={this.state.pageSize}
+          currentPage={this.state.currentPage}
+          onPageChange={this.handlePageChange}
+        />
       </React.Fragment>
     );
   }
