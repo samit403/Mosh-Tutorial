@@ -58,6 +58,7 @@ class Movies extends Component {
                   <td>{item.numberInStock}</td>
                   <td>{item.dailyRentalRate}</td>
                   <td>
+                    {/* like component */}
                     <Like
                       liked={item.liked}
                       onClick={() => this.handleLike(item)}
@@ -76,6 +77,7 @@ class Movies extends Component {
             })}
           </tbody>
         </table>
+        {/* pagination component */}
         <Pagination />
       </React.Fragment>
     );
