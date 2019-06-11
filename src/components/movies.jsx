@@ -11,11 +11,15 @@ import { getGenres } from "../services/fakeGenreService";
 class Movies extends Component {
   // State of the component
   state = {
-    movies: getMovies(),
+    movies: [],
+    genres: [],
     pageSize: 4,
-    currentPage: 1,
-    genres: getGenres()
+    currentPage: 1
   };
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() });
+  }
 
   // event Handlers
   handleDelete = item => {
@@ -35,18 +39,14 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleGenreClick = genre => {
-    // console.log(genre.name);
-    let movies = [...this.state.movies];
-    const filteredMovies = movies.filter(
-      movie => movie.genre.name === genre.name
-    );
-    // console.log(filteredMovies);
-    this.setState({ movies: filteredMovies });
-  };
-
-  handleAllGenresClick = () => {
-    console.log("all genres clicked");
+  handleGenreSelect = genre => {
+    console.log(genre);
+    // let movies = [...this.state.movies];
+    // const filteredMovies = movies.filter(
+    //   movie => movie.genre.name === genre.name
+    // );
+    // // console.log(filteredMovies);
+    // this.setState({ movies: filteredMovies });
   };
 
   // render function
@@ -59,7 +59,7 @@ class Movies extends Component {
       );
     }
 
-    const movieGroups = paginate(
+    const allMovies = paginate(
       this.state.movies,
       this.state.currentPage,
       this.state.pageSize
@@ -70,9 +70,10 @@ class Movies extends Component {
         <div className="row">
           <div className="col-2">
             <ListGroup
-              genres={this.state.genres}
-              onGenreClick={this.handleGenreClick}
-              onAllGenresClick={this.handleAllGenresClick}
+              items={this.state.genres}
+              textProperty="name"
+              valueProperty="_id"
+              onItemSelect={this.handleGenreSelect}
             />
           </div>
           <div className="col">
@@ -93,7 +94,7 @@ class Movies extends Component {
                 </tr>
               </thead>
               <tbody>
-                {movieGroups.map(item => {
+                {allMovies.map(item => {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>

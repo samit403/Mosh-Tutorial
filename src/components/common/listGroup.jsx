@@ -2,26 +2,18 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 const ListGroup = props => {
-  const genres = props.genres;
+  const { items, textProperty, valueProperty } = props;
 
   return (
     <div className="list-group">
-      <button
-        className="list-group-item list-group-item-action"
-        style={{ cursor: "pointer" }}
-        onClick={props.onAllGenresClick}
-      >
-        All Genres
-      </button>
-      {/* dynamically generate other genres in the list group */}
-      {genres.map(genre => (
+      {items.map(item => (
         <button
-          key={genre._id}
+          key={item[valueProperty]}
           style={{ cursor: "pointer" }}
           className="list-group-item list-group-item-action"
-          onClick={() => props.onGenreClick(genre)}
+          onClick={() => props.onItemSelect(item)}
         >
-          {genre.name}
+          {item[textProperty]}
         </button>
       ))}
     </div>
