@@ -13,12 +13,14 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
+    selectedGenre: null,
     pageSize: 4,
     currentPage: 1
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   // event Handlers
@@ -40,13 +42,8 @@ class Movies extends Component {
   };
 
   handleGenreSelect = genre => {
-    console.log(genre);
-    // let movies = [...this.state.movies];
-    // const filteredMovies = movies.filter(
-    //   movie => movie.genre.name === genre.name
-    // );
-    // // console.log(filteredMovies);
-    // this.setState({ movies: filteredMovies });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
+    // console.log(this.state.selectedGenre);
   };
 
   // render function
@@ -59,8 +56,15 @@ class Movies extends Component {
       );
     }
 
+    const filteredMovies =
+      this.state.selectedGenre && this.state.selectedGenre._id
+        ? this.state.movies.filter(
+            movie => movie.genre._id === this.state.selectedGenre._id
+          )
+        : this.state.movies;
+
     const allMovies = paginate(
-      this.state.movies,
+      filteredMovies,
       this.state.currentPage,
       this.state.pageSize
     );
@@ -71,13 +75,14 @@ class Movies extends Component {
           <div className="col-2">
             <ListGroup
               items={this.state.genres}
+              selectedItem={this.state.selectedGenre}
               onItemSelect={this.handleGenreSelect}
             />
           </div>
           <div className="col">
             <nav className="navbar navbar-light bg-light">
               <span className="navbar-brand mb-0 h2">
-                There are {this.state.movies.length} Movies in the database
+                There are {filteredMovies.length} Movies in the database
               </span>
             </nav>
             <table className="table table-light table-hover">
@@ -120,7 +125,7 @@ class Movies extends Component {
               </tbody>
             </table>
             <Pagination
-              itemsCount={this.state.movies.length}
+              itemsCount={filteredMovies.length}
               pageSize={this.state.pageSize}
               currentPage={this.state.currentPage}
               onPageChange={this.handlePageChange}
