@@ -8,6 +8,7 @@ class Like extends Component {
   render() {
     return (
       <i
+        style={{ cursor: "pointer" }}
         onClick={this.props.onLikeClick}
         className={this.getLikeClass()}
         aria-hidden="true"
