@@ -8,7 +8,7 @@ import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import MovieDetails from "./components/movieDetails";
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <NavBar />
@@ -25,6 +25,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;
