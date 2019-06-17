@@ -10,12 +10,12 @@ import MovieDetails from "./components/movieDetails";
 
 const App = () => {
   return (
-    <div className="container">
+    <React.Fragment>
       <NavBar />
       <main className="container">
         <Switch>
+          <Route path="/movies/:id" exact component={MovieDetails} />
           <Route path="/movies" component={Movies} />
-          <Route path="/movies/:movieId" exact component={MovieDetails} />
           <Route path="/customers" component={Customers} />
           <Route path="/rentals" component={Rentals} />
           <Route path="/not-found" component={NotFound} />
@@ -23,7 +23,7 @@ const App = () => {
           <Redirect to="/not-found" />
         </Switch>
       </main>
-    </div>
+    </React.Fragment>
   );
 };
 
