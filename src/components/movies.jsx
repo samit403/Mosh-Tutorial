@@ -90,7 +90,7 @@ class Movies extends Component {
     return (
       <React.Fragment>
         <div className="row">
-          <div className="col-2">
+          <div className="col-2 mt-3">
             <ListGroup
               items={genres}
               selectedItem={selectedGenre}
@@ -98,9 +98,9 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <nav className="navbar navbar-light bg-light">
+            <h5 className="p-3">
               There are {filtered.length} Movies in the database
-            </nav>
+            </h5>
             <MoviesTable
               movies={pagedMovies}
               sortColumn={sortColumn}
