@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Input from "./input";
 
 class Form extends Component {
   state = {
@@ -26,6 +27,7 @@ class Form extends Component {
   };
 
   handleSubmit = e => {
+    console.log(e);
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -34,6 +36,7 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
+    console.log(input);
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -42,6 +45,28 @@ class Form extends Component {
     const data = { ...this.state.data };
     data[input.name] = input.value;
     this.setState({ data, errors });
+  };
+
+  renderButton = label => {
+    return (
+      <button disabled={this.validate()} className="btn btn-primary">
+        Login
+      </button>
+    );
+  };
+
+  renderInput = (name, label, type = "text") => {
+    const { data, errors } = this.state;
+    return (
+      <Input
+        type={type}
+        name={name}
+        label={label}
+        value={data[name]}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
   };
 }
 
