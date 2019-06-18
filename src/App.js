@@ -1,12 +1,13 @@
 import React from "react";
-import "./App.css";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Movies from "./components/movies";
 import NavBar from "./components/navBar";
-import { Route, Switch, Redirect } from "react-router-dom";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import MovieDetails from "./components/movieDetails";
+import LoginForm from "./components/loginForm";
+import "./App.css";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <NavBar />
       <main className="container">
         <Switch>
+          <Route path="/login" exact component={LoginForm} />
           <Route path="/movies/:id" exact component={MovieDetails} />
           <Route path="/movies" component={Movies} />
           <Route path="/customers" component={Customers} />
