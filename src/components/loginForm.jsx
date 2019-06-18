@@ -1,22 +1,40 @@
 import React, { Component } from "react";
+import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
     account: {
       username: "",
       password: ""
-    }
+    },
+    errors: {}
+  };
+
+  validate = () => {
+    const errors = {};
+    if (this.state.account.username.trim() === "")
+      errors.username = "Username is Required!";
+    if (this.state.account.password.trim() === "")
+      errors.password = "Password is Required!";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+
+    // return { username: "Usernameis required" };
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+    if (errors) return;
 
     //call the server now
     console.log("Submitted");
   };
 
   handleChange = ({ currentTarget: input }) => {
-    console.log(input);
+    // console.log(input);
     const account = { ...this.state.account };
     account[input.name] = input.value;
     this.setState({ account });
@@ -28,29 +46,20 @@ class LoginForm extends Component {
     return (
       <div>
         <h1>Login</h1>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            value={account.username}
-            onChange={this.handleChange}
-            id="username"
-            name="username"
-            type="text"
-            className="form-control"
-          />
-        </div>
+
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              value={account.password}
-              onChange={this.handleChange}
-              id="password"
-              name="password"
-              type="text"
-              className="form-control"
-            />
-          </div>
+          <Input
+            name="username"
+            value={account.username}
+            label="Username"
+            onChange={this.handleChange}
+          />
+          <Input
+            name="password"
+            value={account.password}
+            label="Password"
+            onChange={this.handleChange}
+          />
           <button className="btn btn-primary">Login</button>
         </form>
       </div>
