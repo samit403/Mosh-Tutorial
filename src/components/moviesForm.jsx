@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieDetails = ({ match, history }) => {
+const MoviesForm = ({ match, history }) => {
   return (
     <div>
       <h1>Movie ID - {match.params.id}</h1>
@@ -14,4 +14,4 @@ const MovieDetails = ({ match, history }) => {
   );
 };
 
-export default MovieDetails;
+export default MoviesForm;

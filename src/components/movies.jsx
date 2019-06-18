@@ -8,6 +8,7 @@ import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 class Movies extends Component {
   // State of the component
@@ -55,6 +56,10 @@ class Movies extends Component {
     // console.log(this.state.selectedGenre);
   };
 
+  handleMovieAdd = () => {
+    console.log("movie addition");
+  };
+
   // render function
   render() {
     const {
@@ -98,6 +103,13 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
+            <Link
+              to="/movies/new"
+              onClick={this.handleMovieAdd}
+              className="btn btn-primary mt-3"
+            >
+              Add Movie
+            </Link>
             <h5 className="p-3">
               There are {filtered.length} Movies in the database
             </h5>
