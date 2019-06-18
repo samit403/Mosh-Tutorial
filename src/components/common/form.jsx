@@ -20,14 +20,24 @@ class Form extends Component {
   validateProperty = ({ name, value }) => {
     if (name === "username") {
       if (value.trim() === "") return "Username is required!";
+      if (value.length < 3 || value.length > 30)
+        return "Username must be between 3 and 30 characters!";
+      if (value.indexOf("@") === -1 || value.slice(-1) === ".")
+        return "Username must be an email";
     }
+
     if (name === "password") {
       if (value.trim() === "") return "Password is required!";
+      if (value.length < 5)
+        return "Password must be between atleast 5 characters long!";
+    }
+    if (name === "fullName") {
+      if (value.trim() === "") return "Full Name is required!";
     }
   };
 
   handleSubmit = e => {
-    console.log(e);
+    // console.log(e);
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -36,7 +46,7 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
-    console.log(input);
+    // console.log(input);
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -50,7 +60,7 @@ class Form extends Component {
   renderButton = label => {
     return (
       <button disabled={this.validate()} className="btn btn-primary">
-        Login
+        {label}
       </button>
     );
   };

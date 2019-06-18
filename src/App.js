@@ -8,6 +8,7 @@ import NotFound from "./components/notFound";
 import MovieDetails from "./components/movieDetails";
 import LoginForm from "./components/loginForm";
 import "./App.css";
+import RegisterForm from "./components/registerForm";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <main className="container">
         <Switch>
           <Route path="/login" exact component={LoginForm} />
+          <Route path="/register" exact component={RegisterForm} />
           <Route path="/movies/:id" exact component={MovieDetails} />
           <Route path="/movies" component={Movies} />
           <Route path="/customers" component={Customers} />
