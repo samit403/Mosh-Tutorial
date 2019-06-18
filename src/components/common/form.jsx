@@ -9,11 +9,6 @@ class Form extends Component {
 
   validate = () => {
     const errors = {};
-    if (this.state.data.username.trim() === "")
-      errors.username = "Username is Required!";
-    if (this.state.data.password.trim() === "")
-      errors.password = "Password is Required!";
-
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
@@ -34,10 +29,13 @@ class Form extends Component {
     if (name === "fullName") {
       if (value.trim() === "") return "Full Name is required!";
     }
+    if (name === "title") {
+      if (value.trim() === "") return "Title is required!";
+    }
   };
 
   handleSubmit = e => {
-    // console.log(e);
+    console.log(e);
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });

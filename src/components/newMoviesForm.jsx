@@ -1,7 +1,36 @@
 import React from "react";
+import Form from "./common/form";
 
-const NewMoviesForm = () => {
-  return <h1>New Movie</h1>;
-};
+class NewMoviesForm extends Form {
+  state = {
+    data: {
+      title: "",
+      genre: "",
+      numberInStock: "",
+      dailyRate: ""
+    },
+    errors: {}
+  };
+
+  doSubmit = () => {
+    //call the server now
+    console.log("New Movie Added");
+  };
+
+  render() {
+    return (
+      <div className="content">
+        <h1 className="mt-5">Add New Movie</h1>
+        <form className="mt-5" onSubmit={this.handleSubmit}>
+          {this.renderInput("title", "Title")}
+          {this.renderInput("genre", "Genre")}
+          {this.renderInput("numberInStock", "Number In Stock")}
+          {this.renderInput("dailyRate", "Rate")}
+          <button className="btn btn-primary">Add New Movie</button>
+        </form>
+      </div>
+    );
+  }
+}
 
 export default NewMoviesForm;
