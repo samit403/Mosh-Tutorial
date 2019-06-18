@@ -56,10 +56,6 @@ class Movies extends Component {
     // console.log(this.state.selectedGenre);
   };
 
-  handleMovieAdd = () => {
-    console.log("movie addition");
-  };
-
   // render function
   render() {
     const {
@@ -103,11 +99,7 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <Link
-              to="/movies/new"
-              onClick={this.handleMovieAdd}
-              className="btn btn-primary mt-3"
-            >
+            <Link to="/movies/new" className="btn btn-primary mt-3">
               Add Movie
             </Link>
             <h5 className="p-3">
