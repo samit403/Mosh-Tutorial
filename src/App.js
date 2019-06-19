@@ -17,9 +17,9 @@ const App = () => {
       <NavBar />
       <main className="container">
         <Switch>
-          <Route path="/movies/new" component={NewMoviesForm} />
           <Route path="/login" exact component={LoginForm} />
           <Route path="/register" exact component={RegisterForm} />
+          <Route path="/movies/new" component={NewMoviesForm} />
           <Route path="/movies/:id" exact component={MoviesForm} />
           <Route path="/movies" component={Movies} />
           <Route path="/customers" component={Customers} />

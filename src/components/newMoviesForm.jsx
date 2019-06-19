@@ -13,8 +13,12 @@ class NewMoviesForm extends Form {
   };
 
   doSubmit = () => {
+    const movies = { ...this.state.data };
+    console.log(movies);
+    //update movies inside movies state in movies.jsx
+
     //call the server now
-    console.log("New Movie Added");
+    this.props.history.push("/movies");
   };
 
   render() {

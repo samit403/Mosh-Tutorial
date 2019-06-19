@@ -120,7 +120,6 @@ class Movies extends Component {
             />
           </div>
         </div>
-        {/* pagination component */}
       </React.Fragment>
     );
   }
