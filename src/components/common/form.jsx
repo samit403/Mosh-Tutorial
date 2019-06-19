@@ -32,6 +32,13 @@ class Form extends Component {
     if (name === "title") {
       if (value.trim() === "") return "Title is required!";
     }
+    if (name === "numberInStock") {
+      if (!parseInt(value) || value < 0 || value > 10)
+        return "Stock should be a positive number and less than 10!";
+    }
+    if (name === "dailyRate") {
+      if (value < 1 || value > 5) return "Rate should be betweek 1 and 5!";
+    }
   };
 
   handleSubmit = e => {

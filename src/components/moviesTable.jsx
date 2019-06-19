@@ -35,7 +35,7 @@ class MoviesTable extends Component {
 
   render() {
     const { movies, onSort, sortColumn } = this.props;
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <table className="table table-light table-hover">
         <TableHeader

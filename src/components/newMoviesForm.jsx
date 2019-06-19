@@ -24,8 +24,8 @@ class NewMoviesForm extends Form {
         <form className="mt-5" onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
           {this.renderInput("genre", "Genre")}
-          {this.renderInput("numberInStock", "Number In Stock")}
-          {this.renderInput("dailyRate", "Rate")}
+          {this.renderInput("numberInStock", "Number In Stock", "number")}
+          {this.renderInput("dailyRate", "Rate", "number")}
           <button className="btn btn-primary">Add New Movie</button>
         </form>
       </div>
